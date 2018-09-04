@@ -20,11 +20,13 @@ def run_game():
     # Make a group to store bullets in.
     bullets = Group()
 
+    # Start backgound music
+    ai_settings.set_music_background()
     # Start the main loop for the game.
     while True:
         gf.check_events(ai_settings, screen, ship, bullets)
         ship.update()
-        bullets.update()
+        gf.update_bullets(bullets)
         gf.update_screen(ai_settings, screen, ship, bullets)
 
 run_game()
