@@ -1,0 +1,27 @@
+The script isort is installed in '/Users/dovvypacamalan/Library/Python/3.7/bin' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+  The scripts epylint, pylint, pyreverse and symilar are installed in '/Users/dovvypacamalan/Library/Python/3.7/bin' whichis not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+
+
+
+  git
+We recommend every repository include a README, LICENSE, and .gitignore.
+
+…or create a new repository on the command line
+
+echo "# test" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/daviz888/"reponame".git
+git push -u origin master
+
+…or push an existing repository from the command line
+git remote add origin https://github.com/daviz888/"reponame".git
+git push -u origin master
+
+
+https://github.com/daviz888/alien_invasion.git
+
+pip install https://github.com/pygame/pygame/archive/1.9.4.zip

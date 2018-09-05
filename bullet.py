@@ -20,6 +20,10 @@ class Bullet(Sprite):
         
         self.color = ai_settings.bullet_color
         self.speed_factor = ai_settings.bullet_speed_factor
+        self.bullet_image = pygame.image.load('images/shot2.png')
+        self.fire_sound = pygame.mixer.Sound('music/missile.ogg')
+
+        
 
     def update(self):
         """Move the bullet up the screen."""
@@ -31,4 +35,6 @@ class Bullet(Sprite):
 
     def draw_bullet(self):
         """Draw the bullet to the screen"""
-        pygame.draw.rect(self.screen, self.color, self.rect)
+        # pygame.draw.rect(self.screen, self.color, self.rect)
+        self.screen.blit(self.bullet_image, self.rect)
+

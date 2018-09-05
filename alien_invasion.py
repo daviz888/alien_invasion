@@ -15,6 +15,9 @@ def run_game():
         (ai_settings.screen_width, ai_settings.screen_height))
     pygame.display.set_caption("Alien Invasion")
 
+    # Set screen background image
+    
+
     # Make a ship
     ship = Ship(ai_settings, screen)
     # Make a group to store bullets in.
@@ -22,6 +25,9 @@ def run_game():
 
     # Start backgound music
     ai_settings.set_music_background()
+
+
+
     # Start the main loop for the game.
     while True:
         gf.check_events(ai_settings, screen, ship, bullets)

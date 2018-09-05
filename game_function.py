@@ -15,6 +15,8 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets):
         ship.moving_down = True
     elif event.key == pygame.K_SPACE:
         fire_bullets(ai_settings, screen, ship, bullets)
+    elif event.key == pygame.K_q:
+        sys.exit()
         
 
 def check_keyup_events(event, ship):
@@ -34,10 +36,6 @@ def check_events(ai_settings, screen, ship, bullets):
         if event.type == pygame.QUIT:
             sys.exit()
         
-        elif event.type == pygame.K_q:
-            pygame.QUIT
-            sys.exit()
-
         elif event.type == pygame.KEYDOWN:
             check_keydown_events(event, ai_settings, screen, ship, bullets)
 
@@ -50,6 +48,10 @@ def update_screen(ai_settings, screen, ship, bullets):
     """Update images on the screen and flip to the screen"""
     # Redraw screen during each pass through the loop
     screen.fill(ai_settings.bg_color)
+    screen.blit(ai_settings.image_background, [0,0])
+    # screen.blit(ai_settings.image_debris, screen.get_rect())
+
+
     ship.blitme()
 
     # Redraw all bullets behind ship and aliens.
@@ -73,4 +75,5 @@ def fire_bullets(ai_settings, screen, ship, bullets):
     # Create a new bullet and add it to the bullets group
     if len(bullets) < ai_settings.bullets_allowed:
         new_bullet = Bullet(ai_settings, screen, ship)
+        new_bullet.fire_sound.play()
         bullets.add(new_bullet)
