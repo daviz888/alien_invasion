@@ -6,10 +6,10 @@ class Settings():
     def __init__(self):
         """Initializae the game's settings."""
         # Screen settings
-        self.screen_width = 1000
-        self.screen_height = 600
+        self.screen_width = 1200
+        self.screen_height = 800
         self.bg_color = (135, 206, 250)
-        self.image_background = pygame.image.load('images/aerial_view.png')
+        self.image_background = pygame.image.load('images/bgimage.png')
         self.image_debris = pygame.image.load('images/debris.png')
         self.image_background = pygame.transform.scale(self.image_background, 
             (self.screen_width, self.screen_height))
