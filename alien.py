@@ -1,3 +1,7 @@
+"""
+alien class
+
+"""
 import pygame
 from pygame.sprite import Sprite
 
@@ -26,7 +30,7 @@ class Alien(Sprite):
         self.screen.blit(self.image, self.rect)
 
     def check_edges(self):
-        # """Return if alien is at edge of screen.
+        """Return if alien is at edge of screen."""
         screen_rect = self.screen.get_rect()
         if self.rect.right >= screen_rect.right:
             return True
@@ -35,7 +39,5 @@ class Alien(Sprite):
 
     def update(self):
         """Move the alien right"""
-        self.x += (self.ai_settings.alien_speed_factor *
-                        self.ai_settings.fleet_direction)
+        self.x += (self.ai_settings.alien_speed_factor * self.ai_settings.fleet_direction)
         self.rect.x = self.x
-
