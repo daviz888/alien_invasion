@@ -14,14 +14,16 @@ class Ship(Sprite):
 
         # Load the ship image and get its rect.
         # self.image = pygame.image.load('images/superman.png')
-        self.image = pygame.image.load('images/ship.png')
+        self.image = pygame.image.load('images/ship_2.png').convert_alpha()
 
         self.rect = self.image.get_rect()
+        self.img_rect = self.image.get_rect()
+        
         self.screen_rect = screen.get_rect()
 
         # Start each new ship at the bottom center of the screen
-        self.rect.centerx = self.screen_rect.centerx
-        self.rect.bottom = self.screen_rect.bottom
+        self.rect.centerx = self.screen_rect.centerx 
+        self.rect.bottom = self.screen_rect.bottom 
 
         # Store a decimal value for the ship's center
         self.center = float(self.rect.centerx)
@@ -41,6 +43,7 @@ class Ship(Sprite):
             self.center -= self.ai_settings.ship_speed_factor
         if self.moving_up and self.rect.y > self.screen_rect.top:
             self.rect.y -= self.ai_settings.ship_speed_factor
+        # if self.moving_down and self.rect.bottom - self.img_rect.height / 2 < self.screen_rect.bottom:
         if self.moving_down and self.rect.bottom < self.screen_rect.bottom:
             self.rect.y += self.ai_settings.ship_speed_factor
             
@@ -49,8 +52,11 @@ class Ship(Sprite):
 
     def blitme(self):
         """Draw the ship at its current loacation"""
+        # if self.moving_up:
+        #     self.screen.blit(self.image, self.rect, (self.img_rect.left, self.img_rect.top, self.img_rect.width, self.img_rect.height / 2))
+        # else:
+        #     self.screen.blit(self.image, self.rect, (self.img_rect.left, self.img_rect.height / 2, self.img_rect.width, self.img_rect.height / 2))
         self.screen.blit(self.image, self.rect)
-
     def center_ship(self):
         """Center the ship on the screen."""
         self.center = self.screen_rect.centerx

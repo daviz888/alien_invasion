@@ -24,7 +24,7 @@ class Bullet(Sprite):
         self.color = ai_settings.bullet_color
         self.speed_factor = ai_settings.bullet_speed_factor
         
-        self.fire_sound = pygame.mixer.Sound('music/missile.ogg')
+        self.fire_sound = pygame.mixer.Sound('music/laser.ogg')
 
         
 

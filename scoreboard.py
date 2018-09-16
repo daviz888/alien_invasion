@@ -1,11 +1,11 @@
 """
 scoreboard.py handles the game scoreboard class
 """
-
+import pygame
 import pygame.font
 from pygame.sprite import Group
 from ship import Ship
-
+from sprite_sheets import SpriteSheets
 class Scoreboard():
     """A class to report scoring information."""
 
@@ -55,14 +55,32 @@ class Scoreboard():
         self.level_rect.right = self.score_rect.right
         self.level_rect.top = self.score_rect.bottom + 10
     
+    # def prep_ships(self):
+    #     """Show how many ships are left."""
+    #     self.ships = Group()
+    #     for ship_number in range(self.stats.ships_left):
+    #         ship = Ship(self.ai_settings, self.screen)
+    #         ship.rect.x = 10 + ship_number * ship.img_rect.width
+    #         ship.rect.y = 10
+            
+    #         # self.ships.add(ship.image.subsurface((ship.img_rect.left, ship.img_rect.height / 2, ship.img_rect.width, ship.img_rect.height / 2)))
+
+    #         self.ships.add(ship)
+
     def prep_ships(self):
-        """Show how many ships are left."""
-        self.ships = Group()
-        for ship_number in range(self.stats.ships_left):
-            ship = Ship(self.ai_settings, self.screen)
-            ship.rect.x = 10 + ship_number * ship.rect.width
-            ship.rect.y = 10
-            self.ships.add(ship)
+        """ show space ships spritesheets """
+        # self.space_ships = Group()
+        scale = (30 ,48)
+        space_ships = SpriteSheets('images/space_ship.png', 2, 1, scale)
+
+        space_ship = space_ships.get_sheet_frame()
+        for ship in range(self.stats.ships_left):
+            shipx = 20 + ship * space_ships.cell_width
+            shipy = 15
+            self.screen.blit(space_ship[1], (shipx, shipy))
+
+
+
 
 
     def show_score(self):
@@ -71,4 +89,5 @@ class Scoreboard():
         self.screen.blit(self.high_score_image, self.high_score_rect)
         self.screen.blit(self.level_image, self.level_rect)
         # Draw ships.
-        self.ships.draw(self.screen)
+        # self.ships.draw(self.screen)
+        self.prep_ships()

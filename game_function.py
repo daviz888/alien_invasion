@@ -3,6 +3,7 @@ game_function.py module main mudule
 """
 
 import sys
+import explosion
 from time import sleep
 import pygame
 from bullet import Bullet
@@ -130,7 +131,11 @@ def check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship, aliens, 
     # Remove any bullets and aliens that have collided.
     collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
 
+
     if collisions:
+        for collide in collisions:
+            ai_settings.explosion_effects.play()
+            explosion.sprite(ai_settings.screen_width, ai_settings.screen_height, screen, 64,64, collide.rect.center)
         for alien in collisions.values():
             stats.score += ai_settings.alien_points * len(alien)
             sb.prep_score()
@@ -261,3 +266,71 @@ def update_aliens(ai_settings, screen, stats, sb, ship, aliens, bullets):
 
     # Look for aliens hitting the bottom of the screen.
     check_aliens_bottom(ai_settings, screen, stats, sb, ship, aliens, bullets)
+
+def ship_explod(screen):
+    explosion_frames = []
+    timer = pygame.time.Clock()
+
+    w, h = (64, 64) 
+    img_explode = pygame.image.load('images/explosion.png')
+    img_explode = pygame.transform.scale(img_explode, (1536, 64))
+
+    width, height = img_explode.get_size()
+
+    for col in range(int(width / w)):     
+        explosion_frames.append(img_explode.subsurface(( col * w, 0, w, h )))
+    image = pygame.image.load('images/ship.png')
+
+    counter = 0
+    total_cells = int(width / w)
+    exploding = True
+    while exploding:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+        if counter == (total_cells - 1):
+            exploding = False
+
+        print(counter)
+        print(f'total{total_cells}')
+        print(explosion_frames[counter])
+        screen.blit(image, (100, 15))
+        counter += 1
+        timer.tick(10)
+
+
+# def ship_explod(ings, screen):
+#     img_explode = pygame.image.load('images/explosion.png')
+#     img_explode = pygame.transform.scale(img_explode, (1536, 64))
+
+#     explosion_frames = []
+#     timer = pygame.time.Clock()
+
+#     width, height = (64, 64) 
+#     total_cells = int(1536/ width)
+#     for col in range(total_cells):     
+#         rect = pygame.Rect(col * width, 0, width, height)
+#         blust = pygame.Surface(rect.size)
+#         blust.blit(img_explode, rect)
+#         explosion_frames.append(blust)
+#     counter = 0
+#     exploding = True
+#     while exploding:
+#         for event in pygame.event.get():
+#             if event.type == pygame.QUIT:
+#                 pygame.quit()
+#                 quit()
+
+#         if counter < total_cells:
+#             exploding = False
+#         print(counter)
+#         print(f'total{total_cells}')
+#         screen.blit(explosion_frames[counter], (90, 60))
+#         counter += 1
+#         timer.tick(20)
+
+
+        
+       

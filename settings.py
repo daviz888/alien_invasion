@@ -1,3 +1,4 @@
+import sys
 import pygame
 
 class Settings():
@@ -9,12 +10,17 @@ class Settings():
         self.screen_width = 1024
         self.screen_height = 600
         self.bg_color = (135, 206, 250)
-        self.image_background = pygame.image.load('images/bgimage.png')
+        # self.image_background = pygame.image.load('images/bgimage.png').convert()
+        self.image_background = pygame.image.load('images/universe.png')
         self.image_debris = pygame.image.load('images/debris.png')
-        self.image_background = pygame.transform.scale(self.image_background, 
-            (self.screen_width, self.screen_height))
+        self.image_background = pygame.transform.scale(self.image_background, (self.screen_width, self.screen_height))
         self.image_debris = pygame.transform.scale(self.image_debris,
             (self.screen_width, self.screen_height))
+
+
+          # Loade explosion sheet
+        # self.img_explode = pygame.image.load('images/explosion.png')
+        # self.img_explode = pygame.transform.scale(self.img_explode, (1536, 64))
 
         #Ship Settings
         self.ship_limit = 3
@@ -36,10 +42,13 @@ class Settings():
 
         self.initialize_dynamic_settings()
 
+        # Set explosion effects.
+        self.explosion_effects = pygame.mixer.Sound('music/explosion.ogg')
+
     def set_music_background(self):
         """Add music background."""
         pygame.mixer.init()
-        pygame.mixer.music.load('music/intro.ogg')
+        pygame.mixer.music.load('music/soundtrack.ogg')
         pygame.mixer.music.play(-1)
 
     def initialize_dynamic_settings(self):
@@ -61,3 +70,4 @@ class Settings():
         self.alien_speed_factor *= self.speedup_scale
 
         self.alien_points = int(self.alien_points * self.score_scale)
+
